@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import SplashScreen from '@/components/SplashScreen/Splash.Screen';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -24,6 +25,7 @@ export default function RootLayout() {
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
+      <SplashScreen/>
     </ThemeProvider>
   );
 }
