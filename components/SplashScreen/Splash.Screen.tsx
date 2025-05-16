@@ -1,11 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 
 const size = Dimensions.get('window');
 const sizeWidth = size.width;
 
 export default function SplashScreen() {
-    const scrollRef = useRef<any>(null)
+    const scrollRef = useRef<any>(null);
+    const [isOpen, setIsOpen] = useState(false);
     useEffect(() => {
         setTimeout(() => {
             scrollRef.current.scrollTo({
@@ -37,8 +38,12 @@ export default function SplashScreen() {
                 animated : true
             })
         }, 5000)
+        setTimeout(() => {
+            setIsOpen(true)
+        }, 5200)
     },[])
 
+    if(isOpen) return null;
     return (
         <View style={styles.global}>
             <Text style={styles.textGo}>Go.</Text>
