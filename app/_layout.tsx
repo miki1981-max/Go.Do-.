@@ -6,6 +6,8 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import SplashScreen from '@/components/SplashScreen/Splash.Screen';
+import { I18nextProvider } from 'react-i18next'
+import i18n from '@/constants/i18n'
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -20,12 +22,14 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <SplashScreen/>
-      <StatusBar style="auto" />
+      <I18nextProvider i18n={i18n}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <SplashScreen />
+        <StatusBar style="auto" />
+      </I18nextProvider>
     </ThemeProvider>
   );
 }

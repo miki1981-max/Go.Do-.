@@ -1,19 +1,23 @@
 import { Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { useState } from 'react';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { t } from '@/constants/i18n';
 
-const categories = [
-  { label: 'Kul för barn', color: '#2ecc71', sub: ['0–4', '5–10', '11–15', 'Allt i kategorin'] },
-  { label: 'Evenemang', color: '#e74c3c', sub: ['Festival', 'Konsert', 'Marknad', 'Alla'] },
-  { label: 'Idrott & sport', color: '#9b59b6', sub: ['Fotboll', 'Gym', 'Simning', 'Alla'] },
-  { label: 'Underhållning', color: '#000000', sub: ['Bio', 'Teater', 'Stand-up', 'Alla'] },
-  { label: 'Kultur & sevärdheter', color: '#3498db', sub: ['Museum', 'Utställning', 'Historik', 'Alla'] },
-  { label: 'Upplevelser & äventyr', color: '#95a5a6', sub: ['Escape Room', 'Paintball', 'Zipline', 'Alla'] },
-  { label: 'Lära & utforska', color: '#e67e22', sub: ['Workshops', 'Föreläsning', 'Studiebesök', 'Alla'] },
-  { label: 'Hälsa & välmående', color: '#f78ed0', sub: ['Yoga', 'Spa', 'Meditation', 'Alla'] },
-];
 
 export default function TabLayout() {
+  const categories = [
+    { label: t('funForKids'), color: '#2ecc71', sub: ['0–4', '5–10', '11–15', 'Allt i kategorin'] },
+    { label: 'Evenemang', color: '#e74c3c', sub: ['Festival', 'Konsert', 'Marknad', 'Alla'] },
+    { label: 'Idrott & sport', color: '#9b59b6', sub: ['Fotboll', 'Gym', 'Simning', 'Alla'] },
+    { label: 'Underhållning', color: '#000000', sub: ['Bio', 'Teater', 'Stand-up', 'Alla'] },
+    { label: 'Kultur & sevärdheter', color: '#3498db', sub: ['Museum', 'Utställning', 'Historik', 'Alla'] },
+    { label: 'Upplevelser & äventyr', color: '#95a5a6', sub: ['Escape Room', 'Paintball', 'Zipline', 'Alla'] },
+    { label: 'Lära & utforska', color: '#e67e22', sub: ['Workshops', 'Föreläsning', 'Studiebesök', 'Alla'] },
+    { label: 'Hälsa & välmående', color: '#f78ed0', sub: ['Yoga', 'Spa', 'Meditation', 'Alla'] },
+  ];
+
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [render, setRender] = useState<any>(false);
 
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
@@ -28,6 +32,7 @@ export default function TabLayout() {
           <Text style={{ marginRight: 10 }}>🌐</Text>
           <Text style={{ marginRight: 10 }}>🇸🇪</Text>
           <Text style={{ fontSize: 24 }}>☰</Text>
+          
         </View>
       </View>
 
@@ -123,6 +128,8 @@ export default function TabLayout() {
       >
         <Text style={{ color: '#f1c40f', fontSize: 22, textAlign: 'center', fontWeight: 'bold' }}>Go.Do.</Text>
       </TouchableOpacity>
+
+      <LanguageSwitcher setRender={setRender} />
     </ScrollView>
   );
 }
