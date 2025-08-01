@@ -1,8 +1,10 @@
+
 import React, { useState } from "react";
 import { ScrollView, View, Text, StyleSheet, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Header";
 import ShowAllButton from "../../components/ShowAllButton";
+
 
 export default function TabLayout() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
@@ -83,6 +85,7 @@ export default function TabLayout() {
               </Pressable>
             ))}
           </View>
+
         );
       }
     }
