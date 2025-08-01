@@ -79,7 +79,7 @@ export default function SplashScreen() {
                     useNativeDriver: false
                 }),
                 Animated.timing(top, {
-                    toValue: 18,
+                    toValue: 14,
                     duration: 300,
                     useNativeDriver: false
                 }),

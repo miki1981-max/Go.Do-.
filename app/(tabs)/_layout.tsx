@@ -27,7 +27,7 @@ export default function TabLayout() {
     <ScrollView style={{ flex: 1, backgroundColor: '#f1c40f' }} contentContainerStyle={{ padding: 16 }}>
       {/* Header */}
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Text style={{ fontSize: 36, fontWeight: 'bold' }}>Go.</Text>
+        <Text style={{ fontSize: 36, fontWeight: 'bold' }}></Text>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text style={{ marginRight: 10 }}>🌐</Text>
           <Text style={{ marginRight: 10 }}>🇸🇪</Text>
