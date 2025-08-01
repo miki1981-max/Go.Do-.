@@ -1,128 +1,213 @@
-import { Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-import { useState } from 'react';
-
-const categories = [
-  { label: 'Kul för barn', color: '#2ecc71', sub: ['0–4', '5–10', '11–15', 'Allt i kategorin'] },
-  { label: 'Evenemang', color: '#e74c3c', sub: ['Festival', 'Konsert', 'Marknad', 'Alla'] },
-  { label: 'Idrott & sport', color: '#9b59b6', sub: ['Fotboll', 'Gym', 'Simning', 'Alla'] },
-  { label: 'Underhållning', color: '#000000', sub: ['Bio', 'Teater', 'Stand-up', 'Alla'] },
-  { label: 'Kultur & sevärdheter', color: '#3498db', sub: ['Museum', 'Utställning', 'Historik', 'Alla'] },
-  { label: 'Upplevelser & äventyr', color: '#95a5a6', sub: ['Escape Room', 'Paintball', 'Zipline', 'Alla'] },
-  { label: 'Lära & utforska', color: '#e67e22', sub: ['Workshops', 'Föreläsning', 'Studiebesök', 'Alla'] },
-  { label: 'Hälsa & välmående', color: '#f78ed0', sub: ['Yoga', 'Spa', 'Meditation', 'Alla'] },
-];
+import React, { useState } from "react";
+import { ScrollView, View, Text, StyleSheet, Pressable } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Header from "../../components/Header";
+import ShowAllButton from "../../components/ShowAllButton";
 
 export default function TabLayout() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [selectedSubcategories, setSelectedSubcategories] = useState<{ [key: number]: string[] }>({});
+
+  const categories = [
+    { label: "Kul för barn", color: "#2ecc71", sub: ["0-4", "5-10", "11-15", "Allt i kategorin"] },
+    { label: "Evenemang", color: "#e74c3c", sub: ["Festival", "Konsert", "Marknad", "Alla"] },
+    { label: "Idrott & sport", color: "#9b59b6", sub: ["Fotboll", "Gym", "Simning", "Alla"] },
+    { label: "Underhållning", color: "#000000", sub: ["Bio", "Teater", "Stand-up", "Alla"] },
+    { label: "Kultur & sevärdheter", color: "#3498db", sub: ["Museum", "Utställning", "Historik", "Alla"] },
+    { label: "Upplevelser & äventyr", color: "#95a5a6", sub: ["Escape Room", "Paintball", "Ziplines", "Alla"] },
+    { label: "Lära & utforska", color: "#e67e22", sub: ["Workshops", "Föreläsning", "Studiebesök", "Alla"] },
+    { label: "Hälsa & välmående", color: "#f78ed0", sub: ["Yoga", "Spa", "Meditation", "Alla"] },
+  ];
 
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
-  return (
-    <ScrollView style={{ flex: 1, backgroundColor: '#f1c40f' }} contentContainerStyle={{ padding: 16 }}>
-      {/* Header */}
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Text style={{ fontSize: 36, fontWeight: 'italic' }}>Go.</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={{ marginRight: 10 }}>🌐</Text>
-          <Text style={{ marginRight: 10 }}>🇸🇪</Text>
-          <Text style={{ fontSize: 24 }}>☰</Text>
+  const toggleSubcategory = (catIndex: number, subLabel: string) => {
+    const selected = selectedSubcategories[catIndex] || [];
+    const updated = selected.includes(subLabel)
+      ? selected.filter(item => item !== subLabel)
+      : [...selected, subLabel];
+    setSelectedSubcategories(prev => ({ ...prev, [catIndex]: updated }));
+  };
+
+  const renderCategoryGrid = () => {
+    const rows = [];
+
+    for (let i = 0; i < categories.length; i += 4) {
+      const row = categories.slice(i, i + 4);
+      const rowIndex = i;
+
+      rows.push(
+        <View key={`row-${rowIndex}`} style={styles.categoryRow}>
+          {row.map((cat, indexInRow) => {
+            const absoluteIndex = rowIndex + indexInRow;
+            return (
+              <Pressable
+                key={absoluteIndex}
+                onPress={() => toggleExpand(absoluteIndex)}
+                style={[styles.categoryButton, { backgroundColor: cat.color }]}
+              >
+                <Text
+  style={styles.categoryText}
+  numberOfLines={2}
+  ellipsizeMode="tail"
+>
+  {expandedIndex === absoluteIndex ? "X" : cat.label}
+</Text>
+
+              </Pressable>
+            );
+          })}
         </View>
-      </View>
+      );
 
-      {/* Search Bar */}
-      <TextInput
-        placeholder="Search"
-        style={{
-          backgroundColor: '#fff',
-          padding: 10,
-          borderRadius: 10,
-          marginVertical: 16,
-          fontSize: 16,
-        }}
-      />
+      const expandedInThisRow = row.findIndex((_, idx) => rowIndex + idx === expandedIndex);
+      if (expandedInThisRow !== -1) {
+        const catIndex = rowIndex + expandedInThisRow;
+        const cat = categories[catIndex];
 
-      {/* Section Title */}
-      <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 8 }}>Vad vill du göra?</Text>
-
-      {/* Categories */}
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-        {categories.map((category, index) => (
-          <View key={index} style={{ width: '23%', marginBottom: 10 }}>
-            <TouchableOpacity
-              style={{
-                backgroundColor: category.color,
-                paddingVertical: 12,
-                borderRadius: 10,
-              }}
-              onPress={() => toggleExpand(index)}
-            >
-              <Text style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center', fontSize: 12 }}>
-                {category.label}
-              </Text>
-            </TouchableOpacity>
-
-            {/* Subcategories */}
-            {expandedIndex === index && (
-              <View style={{ flexWrap: 'wrap', flexDirection: 'row', marginTop: 6, justifyContent: 'space-between' }}>
-                {category.sub.map((sub, i) => (
-                  <View key={i} style={{ width: '48%', marginBottom: 6 }}>
-                    <TouchableOpacity
-                      style={{
-                        backgroundColor: '#82e0aa',
-                        paddingVertical: 8,
-                        borderRadius: 8,
-                      }}
-                    >
-                      <Text style={{ textAlign: 'center', fontWeight: '600' }}>{sub}</Text>
-                    </TouchableOpacity>
-                  </View>
-                ))}
-              </View>
-            )}
+        rows.push(
+          <View key={`sub-${catIndex}`} style={styles.subRow}>
+            {cat.sub.map((sub, idx) => (
+              <Pressable
+                key={idx}
+                onPress={() => toggleSubcategory(catIndex, sub)}
+                style={[
+                  styles.subcategoryButton,
+                  { backgroundColor: cat.color },
+                  selectedSubcategories[catIndex]?.includes(sub) && styles.selectedSub,
+                ]}
+              >
+                <Text style={styles.subText}>{sub}</Text>
+              </Pressable>
+            ))}
           </View>
-        ))}
-      </View>
+        );
+      }
+    }
 
-      {/* Location */}
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginTop: 20 }}>Var?</Text>
-      <TextInput
-        placeholder="Välj stad"
-        style={{
-          backgroundColor: '#fff',
-          borderRadius: 10,
-          padding: 10,
-          marginTop: 8,
-          fontSize: 16,
-        }}
-      />
+    return <View>{rows}</View>;
+  };
 
-      {/* Date */}
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginTop: 16 }}>När?</Text>
-      <TextInput
-        placeholder="Välj datum"
-        style={{
-          backgroundColor: '#fff',
-          borderRadius: 10,
-          padding: 10,
-          marginTop: 8,
-          fontSize: 16,
-        }}
-      />
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Header />
+        <View style={styles.categoryWrapper}>
+          <Text style={styles.sectionTitle}>Vad vill du göra?</Text>
+          {renderCategoryGrid()}
+          <ShowAllButton />
+        </View>
 
-      {/* Go Button */}
-      <TouchableOpacity
-        style={{
-          backgroundColor: '#000',
-          padding: 16,
-          borderRadius: 12,
-          marginTop: 24,
-          marginBottom: 40,
-        }}
-      >
-        <Text style={{ color: '#f1c40f', fontSize: 22, textAlign: 'center', fontWeight: 'bold' }}>Go.Do.</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <View style={styles.sectionBox}>
+          <Text style={styles.sectionTitle}>Var?</Text>
+          <View style={styles.fakeImage}><Text style={styles.fakeImageText}>Välj stad</Text></View>
+
+          <Text style={[styles.sectionTitle, { marginTop: 16 }]}>När?</Text>
+          <View style={styles.fakeDate}><Text style={styles.fakeDateIcon}>📅</Text></View>
+        </View>
+
+        <View style={styles.goDoBtn}><Text style={styles.goDoText}>Go.Do.</Text></View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#FFD700",
+  },
+  container: {
+    padding: 16,
+  },
+  categoryWrapper: {
+    backgroundColor: "#fff1c2",
+    padding: 10,
+    borderRadius: 15,
+    marginBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  categoryRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  categoryButton: {
+    flex: 1,
+    marginHorizontal: 4,
+    paddingVertical: 12,
+    borderRadius: 15,
+    alignItems: "center",
+  },
+  categoryText: {
+    color: "#fff",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  subRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 12,
+    paddingHorizontal: 4,
+  },
+  subcategoryButton: {
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+    borderRadius: 10,
+    marginVertical: 4,
+    flexBasis: "23%",
+    alignItems: "center",
+  },
+  selectedSub: {
+    opacity: 0.8,
+    borderWidth: 1,
+    borderColor: "#fff",
+  },
+  subText: {
+    color: "#fff",
+    fontSize: 12,
+  },
+  sectionBox: {
+    marginBottom: 20,
+  },
+  fakeImage: {
+    width: 100,
+    height: 60,
+    backgroundColor: "#ccc",
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  fakeImageText: {
+    color: "#fff",
+  },
+  fakeDate: {
+    width: 50,
+    height: 40,
+    backgroundColor: "#fff1c2",
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  fakeDateIcon: {
+    fontSize: 20,
+  },
+  goDoBtn: {
+    backgroundColor: "black",
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 20,
+  },
+  goDoText: {
+    color: "#FFD700",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+});
