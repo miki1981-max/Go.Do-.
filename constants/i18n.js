@@ -10,7 +10,6 @@ import {
 import en from '../locales/en.json';
 import sv from '../locales/sv.json';
 
-
 const phoneLanguage = getLocales();
 const workLanguages = ['en', 'sv'];
 
