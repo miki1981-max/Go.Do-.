@@ -3,5 +3,8 @@
   "chooseCity": "Välj stad",
   "chooseDate": "Välj datum",
   "go": "Go.Do.",
-  "funForKids" : "Kul för barn"
+  "funForKids" : "Kul för barn",
+  "where":"Var?",
+  "whatDoYouWantToDo" : "Vad vill du göra?",
+  "entertaiment": "Underhållning"
 }

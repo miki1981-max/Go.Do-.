@@ -4,22 +4,25 @@ import { ScrollView, View, Text, StyleSheet, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Header";
 import ShowAllButton from "../../components/ShowAllButton";
+import { t } from '@/constants/i18n';
 
+const categories = [
+  { label: "Kul för barn", color: "#2ecc71", sub: ["0-4", "5-10", "11-15", "Allt i kategorin"] },
+  { label: "Evenemang", color: "#e74c3c", sub: ["Festival", "Konsert", "Marknad", "Alla"] },
+  { label: "Idrott & sport", color: "#9b59b6", sub: ["Fotboll", "Gym", "Simning", "Alla"] },
+  { label: "Underhållning", color: "#000000", sub: ["Bio", "Teater", "Stand-up", "Alla"] },
+  { label: "Kultur & sevärdheter", color: "#3498db", sub: ["Museum", "Utställning", "Historik", "Alla"] },
+  { label: "Upplevelser & äventyr", color: "#95a5a6", sub: ["Escape Room", "Paintball", "Ziplines", "Alla"] },
+  { label: "Lära & utforska", color: "#e67e22", sub: ["Workshops", "Föreläsning", "Studiebesök", "Alla"] },
+  { label: "Hälsa & välmående", color: "#f78ed0", sub: ["Yoga", "Spa", "Meditation", "Alla"] },
+];
 
 export default function TabLayout() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [selectedSubcategories, setSelectedSubcategories] = useState<{ [key: number]: string[] }>({});
+  const [render, setRender] = useState(false);
+  const updateThisPage = () => {setRender(!render)}
 
-  const categories = [
-    { label: "Kul för barn", color: "#2ecc71", sub: ["0-4", "5-10", "11-15", "Allt i kategorin"] },
-    { label: "Evenemang", color: "#e74c3c", sub: ["Festival", "Konsert", "Marknad", "Alla"] },
-    { label: "Idrott & sport", color: "#9b59b6", sub: ["Fotboll", "Gym", "Simning", "Alla"] },
-    { label: "Underhållning", color: "#000000", sub: ["Bio", "Teater", "Stand-up", "Alla"] },
-    { label: "Kultur & sevärdheter", color: "#3498db", sub: ["Museum", "Utställning", "Historik", "Alla"] },
-    { label: "Upplevelser & äventyr", color: "#95a5a6", sub: ["Escape Room", "Paintball", "Ziplines", "Alla"] },
-    { label: "Lära & utforska", color: "#e67e22", sub: ["Workshops", "Föreläsning", "Studiebesök", "Alla"] },
-    { label: "Hälsa & välmående", color: "#f78ed0", sub: ["Yoga", "Spa", "Meditation", "Alla"] },
-  ];
 
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
@@ -96,18 +99,20 @@ export default function TabLayout() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
-        <Header />
+        <Header changeLang={updateThisPage} />
         <View style={styles.categoryWrapper}>
-          <Text style={styles.sectionTitle}>Vad vill du göra?</Text>
+          {/* <Text style={styles.sectionTitle}>Vad vill du göra?</Text> */}
+          <Text style={styles.sectionTitle}>{t('whatDoYouWantToDo')}</Text>
           {renderCategoryGrid()}
           <ShowAllButton />
         </View>
 
         <View style={styles.sectionBox}>
-          <Text style={styles.sectionTitle}>Var?</Text>
+          <Text style={styles.sectionTitle}>{t('where')}</Text>
           <View style={styles.fakeImage}><Text style={styles.fakeImageText}>Välj stad</Text></View>
 
           <Text style={[styles.sectionTitle, { marginTop: 16 }]}>När?</Text>
+          <Text style={[styles.sectionTitle, { marginTop: 16 }]}>{t('entertaiment')}</Text>
           <View style={styles.fakeDate}><Text style={styles.fakeDateIcon}>📅</Text></View>
         </View>
 

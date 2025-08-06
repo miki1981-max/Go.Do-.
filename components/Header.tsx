@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import i18n, { currentLanguage } from '@/constants/i18n';
 
-export default function Header() {
+export default function Header(props : {changeLang : () => void}) {
+    const [lang, setLang] = useState(currentLanguage);
+  
+      const translateLanguage = (lang : string) => {
+          i18n.changeLanguage(lang);
+          setLang(lang);
+          props.changeLang()
+      }
   return (
     <View
       style={{
@@ -13,7 +21,7 @@ export default function Header() {
       }}
     >
       {/* Logo */}
-      <Text style={{ fontSize: 32, fontWeight: 'bold' }}>Go.</Text>
+      <Text style={{ fontSize: 32, fontWeight: 'bold', color : 'transperent', opacity : 0 }}>Go.</Text>
 
       {/* Search */}
       <TextInput
@@ -30,16 +38,16 @@ export default function Header() {
 
       {/* Flags */}
       <View style={{ flexDirection: 'row', marginRight: 10 }}>
-        <TouchableOpacity style={{ marginRight: 5 }}>
+        <TouchableOpacity style={{ marginRight: 5 }} onPress={() => translateLanguage('en')}>
           <Image
             source={require('../assets/images/uk.png')}
-            style={{ width: 24, height: 16, resizeMode: 'contain' }}
+            style={{ width: 24, height: 16, resizeMode: 'contain', transform: [{ scale: lang === 'en' ? 1.3 : 1 }] }}
           />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => translateLanguage('sv')}>
           <Image
             source={require('../assets/images/se.png')}
-            style={{ width: 24, height: 16, resizeMode: 'contain' }}
+            style={{ width: 24, height: 16, resizeMode: 'contain', transform: [{ scale: lang === 'sv' ? 1.3 : 1 }] }}
           />
         </TouchableOpacity>
       </View>

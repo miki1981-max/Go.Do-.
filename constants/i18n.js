@@ -25,7 +25,7 @@ export const getLocalFileLanguage = () => {
     return findLocalLang || 'sv'
 }
 
-const currentLanguage = getLocalFileLanguage();
+export const currentLanguage = getLocalFileLanguage();
 
 export const languages = [
     {

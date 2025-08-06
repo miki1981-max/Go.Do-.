@@ -6,10 +6,12 @@ import { View, Button, StyleSheet } from 'react-native';
 //<Button title="EN" onPress={() => { i18n.locale = 'en'; }} />
 //<Button title="SV" onPress={() => { i18n.locale = 'sv'; }} />
 export default function LanguageSwitcher({setRender} : any) {
+
     const translateLanguage = (lang : string) => {
         i18n.changeLanguage(lang);
         setRender(lang)
     }
+    
   return (
     <View style={styles.container}>
         {languages.map((elem) => <Button key={elem.type} title={elem.text} onPress={() => translateLanguage(elem.type)} />)}

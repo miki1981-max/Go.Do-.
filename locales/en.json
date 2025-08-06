@@ -3,5 +3,8 @@
   "chooseCity": "Choose a city",
   "chooseDate": "Choose a date",
   "go": "Go.Do.",
-  "funForKids" : "fun for kids"
+  "funForKids" : "fun for kids",
+  "where":"Where?",
+  "whatDoYouWantToDo" : "What do you want to do?",
+  "entertaiment" : "Entertainment"
 }

@@ -3,7 +3,7 @@ import { Animated, Dimensions, ScrollView, StyleSheet, Text, View } from "react-
 
 const size = Dimensions.get('window');
 const sizeWidth = size.width;
-const initialTop = size.height * 0.15;
+const initialTop = size.height * 0.25;
 const goWidth = 220;
 const initialLeft = (sizeWidth - goWidth) / 2;
 
@@ -18,7 +18,7 @@ export default function SplashScreen() {
 
     const interpolatedBackroud = background.interpolate({
         inputRange: [0, 1],
-        outputRange: ['rgba(255,255,0,1)', 'rgba(255,255,0,0)']
+        outputRange: ['rgba(255,215,0,1)', 'rgba(255,255,0,0)']
     })
     // animation Go
     const top = useRef(new Animated.Value(initialTop)).current;
@@ -79,17 +79,17 @@ export default function SplashScreen() {
                     useNativeDriver: false
                 }),
                 Animated.timing(top, {
-                    toValue: 14,
+                    toValue: 76,
                     duration: 300,
                     useNativeDriver: false
                 }),
                 Animated.timing(fontSizeGo, {
-                    toValue: 36,
+                    toValue: 32,
                     duration: 300,
                     useNativeDriver: false
                 }),
                 Animated.timing(left, {
-                    toValue: 16,
+                    toValue: 26,
                     duration: 300,
                     useNativeDriver: false
                 }),
@@ -138,9 +138,10 @@ const styles = StyleSheet.create({
     },
     textGo2: {
         fontSize: 150,
-        fontWeight: 700,
+        // fontWeight: 700,
         marginTop: '30%',
-        color: 'rgba(0,0,0,0)'
+        color: 'rgba(0,0,0,0)',
+        fontWeight: 'bold' 
     },
     scrollC: {
         marginTop: '25%',
