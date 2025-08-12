@@ -4,7 +4,12 @@
   "chooseDate": "Choose a date",
   "go": "Go.Do.",
   "funForKids" : "fun for kids",
-  "where":"Where?",
-  "whatDoYouWantToDo" : "What do you want to do?",
-  "entertaiment" : "Entertainment"
+  "where":"Where to go?",
+  "whatDoYouWantToDo" : "What to do?",
+  "when" : "when",
+  "events" : "Events",
+  "sportsandsportingactivites": "Sports & sporting activites",
+  "everythingincategory": "Everything in category",
+  "festival":"Festivals & entertainment activities"
+
 }

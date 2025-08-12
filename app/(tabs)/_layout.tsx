@@ -6,18 +6,18 @@ import Header from "../../components/Header";
 import ShowAllButton from "../../components/ShowAllButton";
 import { t } from '@/constants/i18n';
 
-const categories = [
-  { label: "Kul för barn", color: "#2ecc71", sub: ["0-4", "5-10", "11-15", "Allt i kategorin"] },
-  { label: "Evenemang", color: "#e74c3c", sub: ["Festival", "Konsert", "Marknad", "Alla"] },
-  { label: "Idrott & sport", color: "#9b59b6", sub: ["Fotboll", "Gym", "Simning", "Alla"] },
-  { label: "Underhållning", color: "#000000", sub: ["Bio", "Teater", "Stand-up", "Alla"] },
-  { label: "Kultur & sevärdheter", color: "#3498db", sub: ["Museum", "Utställning", "Historik", "Alla"] },
-  { label: "Upplevelser & äventyr", color: "#95a5a6", sub: ["Escape Room", "Paintball", "Ziplines", "Alla"] },
-  { label: "Lära & utforska", color: "#e67e22", sub: ["Workshops", "Föreläsning", "Studiebesök", "Alla"] },
-  { label: "Hälsa & välmående", color: "#f78ed0", sub: ["Yoga", "Spa", "Meditation", "Alla"] },
-];
 
 export default function TabLayout() {
+  const categories = [
+    { label: t('funForKids'), color: "#2ecc71", sub: ["0-4", "5-10", "11-15", t('everythingincategory')] },
+    { label: t('events'), color: "#e74c3c", sub: [t('festival'), "Konsert", "Marknad", "Alla"] },
+    { label: t('sportsandsportingactivites'), color: "#9b59b6", sub: ["Fotboll", "Gym", "Simning", "Alla"] },
+    { label: "Underhållning", color: "#000000", sub: ["Bio", "Teater", "Stand-up", "Alla"] },
+    { label: "Kultur & sevärdheter", color: "#3498db", sub: ["Museum", "Utställning", "Historik", "Alla"] },
+    { label: "Upplevelser & äventyr", color: "#95a5a6", sub: ["Escape Room", "Paintball", "Ziplines", "Alla"] },
+    { label: "Lära & utforska", color: "#e67e22", sub: ["Workshops", "Föreläsning", "Studiebesök", "Alla"] },
+    { label: "Hälsa & välmående", color: "#f78ed0", sub: ["Yoga", "Spa", "Meditation", "Alla"] },
+  ];
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [selectedSubcategories, setSelectedSubcategories] = useState<{ [key: number]: string[] }>({});
   const [render, setRender] = useState(false);
@@ -111,8 +111,9 @@ export default function TabLayout() {
           <Text style={styles.sectionTitle}>{t('where')}</Text>
           <View style={styles.fakeImage}><Text style={styles.fakeImageText}>Välj stad</Text></View>
 
-          <Text style={[styles.sectionTitle, { marginTop: 16 }]}>När?</Text>
-          <Text style={[styles.sectionTitle, { marginTop: 16 }]}>{t('entertaiment')}</Text>
+          
+          <Text style={[styles.sectionTitle, { marginTop: 16 }]}>{t('when')}</Text>
+          
           <View style={styles.fakeDate}><Text style={styles.fakeDateIcon}>📅</Text></View>
         </View>
 
