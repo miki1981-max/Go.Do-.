@@ -10,7 +10,7 @@ import { t } from '@/constants/i18n';
 export default function TabLayout() {
   const categories = [
     { label: t('funForKids'), color: "#2ecc71", sub: ["0-4", "5-10", "11-15", t('everythingincategory')] },
-    { label: t('events'), color: "#e74c3c", sub: [t('festival'), "Konsert", "Marknad", "Alla"] },
+    { label: t('events'), color: "#e74c3c", sub: [t('festival'), t('concerts'), "Marknad", "Alla"] },
     { label: t('sportsandsportingactivites'), color: "#9b59b6", sub: ["Fotboll", "Gym", "Simning", "Alla"] },
     { label: "Underhållning", color: "#000000", sub: ["Bio", "Teater", "Stand-up", "Alla"] },
     { label: "Kultur & sevärdheter", color: "#3498db", sub: ["Museum", "Utställning", "Historik", "Alla"] },
