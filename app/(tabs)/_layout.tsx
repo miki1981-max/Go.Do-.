@@ -4,19 +4,20 @@ import { ScrollView, View, Text, StyleSheet, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Header";
 import ShowAllButton from "../../components/ShowAllButton";
-import { t } from '@/constants/i18n';
+import { t } from "@/constants/i18n";
+
 
 
 export default function TabLayout() {
   const categories = [
-    { label: t('funForKids'), color: "#2ecc71", sub: ["0-4", "5-10", "11-15", t('everythingincategory')] },
-    { label: t('events'), color: "#e74c3c", sub: [t('festival'), t('concerts'), "Marknad", "Alla"] },
-    { label: t('sportsandsportingactivites'), color: "#9b59b6", sub: ["Fotboll", "Gym", "Simning", "Alla"] },
-    { label: "Underhållning", color: "#000000", sub: ["Bio", "Teater", "Stand-up", "Alla"] },
-    { label: "Kultur & sevärdheter", color: "#3498db", sub: ["Museum", "Utställning", "Historik", "Alla"] },
-    { label: "Upplevelser & äventyr", color: "#95a5a6", sub: ["Escape Room", "Paintball", "Ziplines", "Alla"] },
-    { label: "Lära & utforska", color: "#e67e22", sub: ["Workshops", "Föreläsning", "Studiebesök", "Alla"] },
-    { label: "Hälsa & välmående", color: "#f78ed0", sub: ["Yoga", "Spa", "Meditation", "Alla"] },
+    { label: t('funForKids'), color: "#2ecc71", sub: ["0-4", "5-10", "11-15"] },
+    { label: t('events'), color: "#e74c3c", sub: [t('festival'), t('concerts'), t('fairsfleamarketsandmarkets')] },
+    { label: t('sportsandsportingactivites'), color: "#9b59b6", sub: [t('sportingactivities'), t("sports"), t('tryitout')] },
+    { label: t('entertainment'), color: "#000000", sub: [t("cinemaandfilm"), t('musicandconcerts'), t('theaterandshows')] },
+    { label: t('cultureandsights'), color: "#3498db", sub: [t('guidedtours'), t('artandartgalleries'), t('museumsandsights') ] },
+    { label: t('adventureandactivities'), color: "#95a5a6", sub: [t('parksandtrails'), t('foodanddrinkactivities'), t('excursionsandadventures') ] },
+    { label: t('learnandexplore'), color: "#e67e22", sub: [t('talksandlectures'), t('learnto'), t('clubsandsocialencounters')] },
+    { label: t('healthandwellbeing'), color: "#f78ed0", sub: [t('spasandswimmingpools'), t('socialsupportandinteraction'), t('activitiesoffaith')] },
   ];
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [selectedSubcategories, setSelectedSubcategories] = useState<{ [key: number]: string[] }>({});

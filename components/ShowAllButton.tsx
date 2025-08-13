@@ -6,7 +6,7 @@ export default function ShowAllButton() {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.text}>Visa mig allt</Text>
+        <Text style={styles.text}> To visa mig allt</Text>
       </TouchableOpacity>
     </View>
   );

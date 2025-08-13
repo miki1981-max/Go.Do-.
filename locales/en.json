@@ -3,14 +3,45 @@
   "chooseCity": "Choose a city",
   "chooseDate": "Choose a date",
   "go": "Go.Do.",
-  "funForKids" : "fun for kids",
+  "funForKids" : "Fun for kids",
   "where":"Where to go?",
   "whatDoYouWantToDo" : "What to do?",
-  "when" : "when",
+  "when" : "When",
   "events" : "Events",
   "sportsandsportingactivites": "Sports & sporting activites",
   "everythingincategory": "Everything in category",
   "festival":"Festivals & entertainment activities",
-  "concerts":"Leisure & lifestyle "
+  "concerts":"Leisure & lifestyle ",
+  "fairsfleamarketsandmarkets":"Fairs,flea markets and markets",
+   "sportingactivities":"Sporting activities",
+   "sports":"Sports",
+   "tryitout":"Try it out",
+  
+   "entertainment":"Entertainment",
+   "cinemaandfilm":"Cinema & film",
+   "musicandconcerts":"Music & concerts",
+   "theaterandshows":"Theater & shows",
+  
+   "cultureandsights":"Culture & sights",
+   "guidedtours":"Guided tours",
+   "artandartgalleries":"Art & art galleries",
+   "museumsandsights":"Museums & sights",
+   
+   "adventureandactivities":"Adventure & activities",
+   "parksandtrails":"Parks & trails",
+   "foodanddrinkactivities":"Food & drink activities",
+   "excursionsandadventures":"Excursions & adventures",
+   "learnandexplore":"Learn & explore",
+   "talksandlectures":"Talks & lectures",
+   "learnto":"Learn to…",
+   "clubsandsocialencounters":" Clubs & social encounters",
+   "healthandwellbeing": "Health & wellbeing",
+   "spasandswimmingpools":"Spas and swimming pools",
+   "Socialsupportandinteraction": "Social support & interaction",
+   "activitiesoffaith":"Activities of faith"
+   
+   
+   
+   
 
 }
