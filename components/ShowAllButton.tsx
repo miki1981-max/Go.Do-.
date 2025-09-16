@@ -16,9 +16,17 @@ type Props = {
 
 export default function ShowAllButton({ onPress, style, textStyle }: Props) {
   return (
+
     <Pressable onPress={onPress} style={[styles.btn, style]}>
       <Text style={[styles.text, textStyle]}>Visa mig allt</Text>
     </Pressable>
+
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.text}> To visa mig allt</Text>
+      </TouchableOpacity>
+    </View>
+
   );
 }
 

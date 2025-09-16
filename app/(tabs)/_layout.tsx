@@ -4,22 +4,26 @@ import { ScrollView, View, Text, StyleSheet, Pressable, StatusBar } from "react-
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Header";
 import ShowAllButton from "../../components/ShowAllButton";
+import { t } from "@/constants/i18n";
+
 
 
 export default function TabLayout() {
+  const categories = [
+    { label: t('funForKids'), color: "#2ecc71", sub: ["0-4", "5-10", "11-15"] },
+    { label: t('events'), color: "#e74c3c", sub: [t('festival'), t('concerts'), t('fairsfleamarketsandmarkets')] },
+    { label: t('sportsandsportingactivites'), color: "#9b59b6", sub: [t('sportingactivities'), t("sports"), t('tryitout')] },
+    { label: t('entertainment'), color: "#000000", sub: [t("cinemaandfilm"), t('musicandconcerts'), t('theaterandshows')] },
+    { label: t('cultureandsights'), color: "#3498db", sub: [t('guidedtours'), t('artandartgalleries'), t('museumsandsights') ] },
+    { label: t('adventureandactivities'), color: "#95a5a6", sub: [t('parksandtrails'), t('foodanddrinkactivities'), t('excursionsandadventures') ] },
+    { label: t('learnandexplore'), color: "#e67e22", sub: [t('talksandlectures'), t('learnto'), t('clubsandsocialencounters')] },
+    { label: t('healthandwellbeing'), color: "#f78ed0", sub: [t('spasandswimmingpools'), t('socialsupportandinteraction'), t('activitiesoffaith')] },
+  ];
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [selectedSubcategories, setSelectedSubcategories] = useState<{ [key: number]: string[] }>({});
+  const [render, setRender] = useState(false);
+  const updateThisPage = () => {setRender(!render)}
 
-  const categories = [
-    { label: "Kul för barn", color: "#2ecc71", sub: ["0-4", "5-10", "11-15", "Allt i kategorin"] },
-    { label: "Evenemang", color: "#e74c3c", sub: ["Festival", "Konsert", "Marknad", "Alla"] },
-    { label: "Idrott & sport", color: "#9b59b6", sub: ["Fotboll", "Gym", "Simning", "Alla"] },
-    { label: "Underhållning", color: "#000000", sub: ["Bio", "Teater", "Stand-up", "Alla"] },
-    { label: "Kultur & sevärdheter", color: "#3498db", sub: ["Museum", "Utställning", "Historik", "Alla"] },
-    { label: "Upplevelser & äventyr", color: "#95a5a6", sub: ["Escape Room", "Paintball", "Ziplines", "Alla"] },
-    { label: "Lära & utforska", color: "#e67e22", sub: ["Workshops", "Föreläsning", "Studiebesök", "Alla"] },
-    { label: "Hälsa & välmående", color: "#f78ed0", sub: ["Yoga", "Spa", "Meditation", "Alla"] },
-  ];
 
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
@@ -80,6 +84,7 @@ export default function TabLayout() {
                 style={[styles.categoryButton, { backgroundColor: cat.color }]}
               >
                 <Text
+
                   style={[
                     styles.categoryText,
                     oneLine && styles.oneLine,
@@ -91,6 +96,15 @@ export default function TabLayout() {
                 >
                   {expandedIndex === absoluteIndex ? "X" : text}
                 </Text>
+
+                  style={styles.categoryText}
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
+                  {expandedIndex === absoluteIndex ? "X" : cat.label}
+                </Text>
+
+
               </Pressable>
             );
           })}
@@ -127,6 +141,7 @@ export default function TabLayout() {
   };
 
   return (
+
     <View style={styles.root}>
       <StatusBar translucent barStyle="dark-content" backgroundColor="transparent" />
       <SafeAreaView style={styles.safeArea} edges={['top','left','right','bottom']}>
@@ -154,6 +169,27 @@ export default function TabLayout() {
             <Text style={[styles.sectionTitle, { marginTop: 16 }]}>När?</Text>
             <View style={styles.fakeDate}><Text style={styles.fakeDateIcon}>📅</Text></View>
           </View>
+
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Header changeLang={updateThisPage} />
+        <View style={styles.categoryWrapper}>
+          {/* <Text style={styles.sectionTitle}>Vad vill du göra?</Text> */}
+          <Text style={styles.sectionTitle}>{t('whatDoYouWantToDo')}</Text>
+          {renderCategoryGrid()}
+          <ShowAllButton />
+        </View>
+
+        <View style={styles.sectionBox}>
+          <Text style={styles.sectionTitle}>{t('where')}</Text>
+          <View style={styles.fakeImage}><Text style={styles.fakeImageText}>Välj stad</Text></View>
+
+          
+          <Text style={[styles.sectionTitle, { marginTop: 16 }]}>{t('when')}</Text>
+          
+          <View style={styles.fakeDate}><Text style={styles.fakeDateIcon}>📅</Text></View>
+        </View>
+
 
           <View style={styles.goDoBtn}><Text style={styles.goDoText}>Go.Do.</Text></View>
         </ScrollView>
