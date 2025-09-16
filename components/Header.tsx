@@ -1,56 +1,90 @@
 import React from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+
+function Hamburger({ size = 28, barHeight = 3 }: { size?: number; barHeight?: number }) {
+  // Bigger, bolder hamburger menu
+  const barStyle = {
+    width: size,
+    height: barHeight,
+    borderRadius: barHeight,
+    backgroundColor: '#000',
+  } as const;
+
+  return (
+    <View
+      accessible
+      accessibilityRole="button"
+      style={{ justifyContent: 'center', alignItems: 'center', padding: 2 }}
+    >
+      <View style={barStyle} />
+      <View style={[barStyle, { marginVertical: 5 }]} />
+      <View style={barStyle} />
+    </View>
+  );
+}
 
 export default function Header() {
+  const SEARCH_HEIGHT = 28; // slightly slimmer like Figma
+
   return (
     <View
       style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: 16,
-        paddingHorizontal: 10,
+        paddingHorizontal: 12,
+        paddingTop: 0,     // removes padding space
+        marginTop: -20,    // pull header closer to top
+        marginBottom: 30,
       }}
     >
-      {/* Logo */}
-      <Text style={{ fontSize: 32, fontWeight: 'bold' }}>Go.</Text>
-
-      {/* Search */}
-      <TextInput
-        placeholder="Search"
+      {/* Row 1 — Flags */}
+      <View
         style={{
-          flex: 1,
-          marginHorizontal: 10,
-          backgroundColor: 'white',
-          borderRadius: 8,
-          paddingHorizontal: 10,
-          height: 40,
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          marginBottom: 2,
         }}
-      />
-
-      {/* Flags */}
-      <View style={{ flexDirection: 'row', marginRight: 10 }}>
-        <TouchableOpacity style={{ marginRight: 5 }}>
+      >
+        <TouchableOpacity accessibilityLabel="Switch to English" style={{ marginRight: 6 }}>
           <Image
-            source={require('../assets/images/uk.png')}
-            style={{ width: 24, height: 16, resizeMode: 'contain' }}
+            source={require('../assets/images/gb.png')}
+            style={{ width: 30, height: 25, resizeMode: 'contain' }}
           />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity accessibilityLabel="Switch to Swedish">
           <Image
-            source={require('../assets/images/se.png')}
-            style={{ width: 24, height: 16, resizeMode: 'contain' }}
+            source={require('../assets/images/sv.png')}
+            style={{ width: 30, height: 25, resizeMode: 'contain' }}
           />
         </TouchableOpacity>
       </View>
 
-      {/* Hamburger */}
-      <TouchableOpacity>
-        <Image
-          source={require('../assets/images/hamburger.png')}
-          style={{ width: 24, height: 24 }}
+      {/* Row 2 — Go. | Search | Hamburger */}
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        {/* Go. */}
+        <Text style={{ fontSize: 30, fontWeight: 'bold', marginRight: 12 }}>Go.</Text>
+
+        {/* Search with BLACK outline */}
+        <TextInput
+          placeholder="Search"
+          accessibilityLabel="Search"
+          placeholderTextColor="#B9B9B9"
+          style={{
+            flex: 1,
+            height: SEARCH_HEIGHT,
+            backgroundColor: '#FFFFFF',
+            borderRadius: 6,
+            paddingHorizontal: 10,
+            marginRight: 10,
+            borderWidth: 1,
+            borderColor: '#000',
+          }}
         />
-      </TouchableOpacity>
+
+        {/* Bigger Hamburger */}
+        <TouchableOpacity accessibilityLabel="Open menu">
+          <Hamburger size={28} barHeight={3} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

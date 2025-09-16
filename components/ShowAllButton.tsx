@@ -1,33 +1,39 @@
-// ShowAllButton.tsx
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  Pressable,
+  Text,
+  StyleSheet,
+  ViewStyle,
+  TextStyle,
+  StyleProp,
+} from 'react-native';
 
-export default function ShowAllButton() {
+type Props = {
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+};
+
+export default function ShowAllButton({ onPress, style, textStyle }: Props) {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.text}>Visa mig allt</Text>
-      </TouchableOpacity>
-    </View>
+    <Pressable onPress={onPress} style={[styles.btn, style]}>
+      <Text style={[styles.text, textStyle]}>Visa mig allt</Text>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'flex-end',
-    marginTop: 10,
-    marginRight: 10,
-  },
-  button: {
-    backgroundColor: '#fff3d1',
+  btn: {
     paddingVertical: 8,
     paddingHorizontal: 12,
-    borderRadius: 10,
-    elevation: 1, 
+    borderRadius: 15,
+    backgroundColor: '#FFFFFF',   // no border
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
-    color: 'black',
-    fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '700',
+    color: '#000',
+    textAlign: 'center',
   },
 });
